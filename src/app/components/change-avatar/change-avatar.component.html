@@ -1,0 +1,34 @@
+<div id="change-avatar-section">
+    <h2 class="title">Change your Avatar</h2>
+    <div *ngIf="user | async as u">
+        <div id="comparison">
+            <div id="old-avatar">
+                <h4 class="title">Old</h4>
+                <img class="avatar" src="{{ u.avatar ? apiUrl + '/' + u.avatar : '/assets/img/avatar.png' }}" />
+            </div>
+            <div id="new-avatar" *ngIf="newAvatarPreview">
+                <h4 class="title">New</h4>
+                <div class="avatar avatar-container" [ngStyle]="{'background-image': 'url(' + newAvatarPreview + ')'}"></div>
+            </div>
+        </div>
+        <form (ngSubmit)="onSubmit()" encType="multipart/form-data">
+            <div id="file-wrapper">
+                <input
+                    type="file"
+                    id="file"
+                    (change)="handleFileInput($event.target.files)" />
+                <span>Drag image here or click to browse</span>
+            </div>
+            <input 
+                type='submit'
+                [value]="uploading ? 'Uploading' : 'Upload'"
+                id="submit-btn"
+                [class.unreachable]="serverUnreachable"
+                [class.uploading]="uploading"
+                [disabled]="!newAvatarPreview || uploading" />
+        </form>	
+    </div>
+
+    <!-- LOADER -->
+    <img class="component-loading-gif" src="/assets/img/loader.gif" *ngIf="!user" />
+</div>

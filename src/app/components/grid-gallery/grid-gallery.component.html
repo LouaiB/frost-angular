@@ -1,0 +1,7 @@
+<div class="photo-grid">
+    <img
+        class="effect"
+        *ngFor="let img of account.gallery"
+        [src]="apiUrl + '/' + img"
+        (click)="lightbox(apiUrl + '/' + img)" />
+</div>

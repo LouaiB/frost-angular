@@ -1,0 +1,220 @@
+@import 'src/assets/styles/_variables.sass'
+    
+.tweet
+    padding: 10px 20px
+    margin-bottom: 10px
+    border-radius: 4px
+    background-color: white
+    display: flex
+    flex-direction: column
+
+    .header
+        display: flex
+        flex-direction: row
+        align-items: center
+
+        .avatar-container
+            margin-right: 10px
+            
+            .avatar
+                width: 45px
+                height: 45px
+                border-radius: 50%
+
+        .info
+            flex: 1
+            display: flex
+            flex-direction: column
+            
+            .poster
+                font-size: 1.1em
+                cursor: pointer
+                outline: none
+
+            .createdOn
+                font-size: 0.8em
+                font-style: italic
+                color: #888
+
+            .sharedBy
+                font-size: 0.9em
+                color: #888
+
+        .actions
+            justify-self: flex-end
+            padding: 5px
+            display: flex
+            flex-direction: row
+            justify-content: flex-end
+
+            button
+                outline: none
+                background: transparent
+                border: 0
+                cursor: pointer
+                color: #888
+                transition: all 0.2s
+
+            button.delete
+
+                &:hover
+                    color: $dangerColor
+
+            button.edit
+
+                &:hover
+                    color: $defaultColor
+
+            button.save
+                font-size: 1.2em
+
+                &:hover
+                    color: $successColor
+
+            button.cancle
+                font-size: 1.2em
+
+                &:hover
+                    color: #555
+
+    .tweet-attachment
+        margin: 10px 0
+        max-height: 400px
+        width: 100%
+        object-fit: cover
+        cursor: pointer
+
+        @media screen and (max-width: $mobileMaxWidth)
+            max-width: 100%
+            width: initial
+
+    .keep
+        display: flex
+        flex-direction: row
+        align-items: center
+
+        .span
+            font-style: 0.9em
+
+    #edit-group
+        display: flex
+        flex-direction: row
+        align-items: center
+
+        #edit-feild
+            flex: 1
+
+
+        #new-attachment
+            position: relative
+            display: flex
+            flex-direction: column
+            align-items: center
+            justify-content: center
+            padding: 5px
+
+            input
+                position: absolute
+                z-index: 100
+                top: 0
+                bottom: 0
+                left: 0
+                right: 0
+                opacity: 0
+                width: 100%
+                height: 100%
+
+            i
+                font-size: 1.2em
+                color: #888
+
+            i.has-value
+                color: $successColor
+
+
+    .lightbox
+        position: fixed
+        top: 20px
+        bottom: 20px
+        left: 20px
+        right: 20px
+        height: 100%
+        width: 100%
+        padding: 50px
+        box-sizing: border-box
+        
+    .content
+
+    
+    #mentions
+        font-size: 0.8em
+        font-style: italic
+        border-left: 2px solid $linkColor
+        padding: 2px 5px
+
+        .mention-link
+            text-decoration: none
+            color: $linkColor
+
+
+    .tweet-btn-group
+        display: flex
+        flex-direction: row
+        align-items: center
+
+        .icon-btn
+            cursor: pointer
+            outline: none
+            color: #27d1ef
+            background: transparent
+            border: 0
+            padding: 5px
+            filter: grayscale(100%) opacity(0.7)
+            transition: all 0.2s
+
+            i
+                font-size: 1.2em
+
+            .likes-count, .comments-count, .shares-count
+                color: #555
+                font-size: 0.9em
+                margin-left: 3px
+        
+        .is-liked, .is-commented, .is-shared
+            filter: grayscale(0%) opacity(1) !important
+
+    .comments
+        transition: all .2s
+        overflow: hidden
+
+    .comments-open
+        height: auto
+
+    .comments-closed
+        height: 0
+
+.retweet
+    border: 0px solid $primaryColor
+
+        
+:host ::ng-deep 
+    .mention
+        padding: 3px
+        background-color: #005384
+        color: white
+        border-radius: 4px
+        transition: all 0.2s
+        font-size: 0.9em
+
+        &:hover
+            filter: brightness(1.4)
+
+    .tag
+        color: $tagColor
+        transition: all 0.2s
+
+        &:hover
+            
+
+
+        

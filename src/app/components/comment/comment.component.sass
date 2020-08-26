@@ -1,0 +1,71 @@
+@import 'src/assets/styles/_variables.sass'
+    
+.comment
+    padding: 5px 0
+    display: flex
+    flex-direction: row
+
+    .comment-avatar-container
+        margin-right: 5px
+
+        .comment-avatar
+            width: 30px
+            height: 30px
+            border-radius: 50%
+
+    .comment-content
+        flex: 1
+        
+        .poster
+            font-size: 1em
+            margin-bottom: 5px
+            margin-right: 5px
+
+        .createdOn
+            font-size: .8em
+            color: #888
+            margin-bottom: 5px
+
+        .comment-text
+            font-size: 0.9em
+
+        input
+            margin-top: 7px
+
+    .comment-actions
+        padding: 5px
+        display: flex
+        flex-direction: row
+        align-items: baseline
+        justify-content: flex-end
+
+        button
+            outline: none
+            background: transparent
+            border: 0
+            cursor: pointer
+            color: #888
+            transition: all 0.2s
+
+        button.delete
+
+            &:hover
+                color: $dangerColor
+
+        button.edit
+
+            &:hover
+                color: $defaultColor
+
+        button.save
+            font-size: 1.2em
+
+            &:hover
+                color: $successColor
+
+        button.cancle
+            font-size: 1.2em
+
+            &:hover
+                color: #555
+

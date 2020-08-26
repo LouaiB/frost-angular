@@ -1,0 +1,233 @@
+@import 'src/assets/styles/_variables.sass'
+
+$tooltipFontSize: 12px
+$tooltipPadding: 6px 10px
+$tooltipTop: -($tooltipFontSize + 17px)
+    
+#friendships-section
+    // background: linear-gradient($bgGradAngle, $bgGradDark, $bgGradLight)
+    padding: 40px 20%
+
+    @media screen and (max-width: $mobileMaxWidth)
+        padding: 20px 10px
+
+    .title
+        color: $primaryColorDark
+        letter-spacing: $titleLetterSpacing
+        text-align: center
+
+    #refresh-flex
+        display: flex
+        flex-direction: row
+        align-items: center
+        justify-content: flex-end
+
+        #refresh
+            outline: none
+            cursor: pointer
+            border: 0
+            background: 0
+            padding: 10px
+            font-size: 14px
+            color: #888
+
+    .spin
+        animation: spin infinite linear 1s
+
+    #friendships
+        display: flex
+        flex-direction: column
+        border: 1px solid #88888833
+        border-radius: 4px
+        transition: all 2s
+
+        .friendship
+            padding: 10px 20px
+            display: flex
+            flex-direction: row
+            align-items: center
+            justify-content: space-between
+            background: $sectionBG
+            border-bottom: 1px solid #88888855
+
+            &:first-child
+                border-top-left-radius: 4px
+                border-top-right-radius: 4px
+
+            &:last-child
+                border-bottom-left-radius: 4px
+                border-bottom-right-radius: 4px
+                border-bottom: 0
+
+            &:nth-child(odd)
+                background: #f1f1f1
+
+            .info
+                flex: 4
+                display: flex
+                flex-direction: row
+                align-items: center
+
+                @media screen and (max-width: $mobileMaxWidth)
+                    flex: 2
+
+                .avatar
+                    height: 30px
+                    width: 30px
+                    border-radius: 50%
+
+                .name
+                    margin-left: 5px
+                    cursor: pointer
+                    outline: none
+                
+            .status
+                flex: 1
+                padding: 5px 10px
+                min-width: 150px
+                display: flex
+                flex-direction: row
+                align-items: center
+
+                @media screen and (max-width: $mobileMaxWidth)
+                    display: none
+
+                i
+                    position: relative
+                    font-size: 16px
+                    margin-right: 5px
+                    transition: all 0.2s
+
+                    &:hover::after
+                        position: absolute
+                        top: $tooltipTop
+                        left: 0
+                        min-width: max-content
+                        padding: $tooltipPadding
+                        background: #000000ee
+                        color: white
+                        font-size: $tooltipFontSize
+                        border-radius: 4px
+
+                i.accepted
+                    color: $successColor
+
+                    &:hover::after
+                        content: 'You are friends'
+                i.outbound
+                    color: $defaultColor
+                    
+                    &:hover::after
+                        content: 'You sent the request'
+                i.inbound
+                    color: $defaultColor
+                    
+                    &:hover::after
+                        content: 'You received the request'
+                i.declined
+                    color: $dangerColor
+
+                    &:hover::after
+                        content: 'Request declined'
+
+            .actions
+                flex: 2
+                padding: 5px 7px
+                display: flex
+                flex-direction: row
+                align-items: center
+                justify-content: flex-end
+
+                @media screen and (max-width: $mobileMaxWidth)
+                    flex: 1
+
+                button
+                    position: relative
+                    margin-right: 5px
+                    outline: none
+                    cursor: pointer
+                    padding: 7px 10px
+                    background: transparent
+                    border-radius: 50%
+                    transition: all 0.2s
+                    filter: grayscale(0.5)
+
+                    @media screen and (max-width: $mobileMaxWidth)
+                        padding: 5px 7px
+                        font-size: 0.9em
+
+                    &:hover
+                        filter: grayscale(0.2)
+
+                        &::after
+                            position: absolute
+                            top: $tooltipTop
+                            left: 0
+                            min-width: max-content
+                            padding: $tooltipPadding
+                            background: #000000ee
+                            color: white
+                            font-size: $tooltipFontSize
+                            border-radius: 4px
+
+                button.accept
+                    color: $successColor
+                    border: 1px solid $successColor
+
+                    &:hover
+                        color: white
+                        background: $successColor
+
+                        &::after
+                            content: 'Accept friend request'
+
+                button.decline
+                    color: $defaultColor
+                    border: 1px solid $defaultColor
+
+                    &:hover
+                        color: white
+                        background: $defaultColor
+
+                        &::after
+                            content: 'Decline friend request'
+
+                button.undecline
+                    color: #555
+                    border: 1px solid #555
+
+                    &:hover
+                        color: white
+                        background: #555
+
+                        &::after
+                            content: 'Undecline friend request'
+
+                button.cancel
+                    color: #555
+                    border: 1px solid #555
+
+                    &:hover
+                        color: white
+                        background: #555
+
+                        &::after
+                            content: 'Cancel friend request'
+
+                button.unfriend
+                    color: $dangerColor
+                    border: 1px solid $dangerColor
+
+                    &:hover
+                        color: white
+                        background: $dangerColor
+
+                        &::after
+                            content: 'Unfriend'
+
+                button.actioning
+                    filter: grayscale(1)
+                    cursor: progress !important
+
+    .unreachable-glow
+        box-shadow: 0 0 20px 7px #fff

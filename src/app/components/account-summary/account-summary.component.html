@@ -1,0 +1,49 @@
+<div id="account-summary">
+    <div class="avatar-container">
+        <img src="{{ account.user.avatar ? apiUrl + '/' + account.user.avatar : '/assets/img/avatar.png' }}" class="avatar" />
+    </div>
+    <div class="info">
+        <div class="name-big">{{ account.user.nickname ? account.user.nickname : account.user.email }}</div>
+        <div class="name-small" *ngIf="account.user.nickname">{{ account.user.email }}</div>
+        <div class="slug">@{{ account.user.slug }}</div>
+        <div class="joined-in">member since {{ account.user.createdOn | date:'LLLL d, y' }}</div>
+        <div class="stats">
+            <div class="stat">
+                <i class="fa fa-snowflake-o" aria-hidden="true"></i>
+                <span class="num">{{ account.stats.tweetCount }}</span>
+            </div>
+            <div class="stat">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                <span class="num">{{ account.stats.friendsCount }}</span>
+            </div>
+            <div class="stat">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                <span class="num">{{ account.stats.likesCount }}</span>
+            </div>
+            <div class="stat">
+                <i class="fa fa-retweet" aria-hidden="true"></i>
+                <span class="num">{{ account.stats.sharesCount }}</span>
+            </div>
+        </div>
+        <div *ngIf="user | async as u">
+            <div *ngIf="u.userId != account.user._id" class="account-btn-group">
+                <button class="befriend" 
+                    *ngIf="!account.userFriendship || (!account.userFriendship.isPending && !account.userFriendship.isAccepted && !account.userFriendship.isDeclined)" 
+                    (click)="sendFriendRequest()"
+                    ><i class="icon fa fa-address-book" aria-hidden="true"></i> Send Friend Request</button>
+                <button class="unfriend"
+                    *ngIf="account.userFriendship && account.userFriendship.isAccepted" 
+                    (click)="unfriend()"
+                    ><i class="icon fa fa-trash" aria-hidden="true"></i> Unfriend</button>
+            </div>
+            <div *ngIf="u.userId == account.user._id" class="account-btn-group">
+                <button class="change-avatar"
+                    routerLink="/changeAvatar"
+                    ><i class="icon fa fa-camera" aria-hidden="true"></i> Picture</button>
+                <button class="change-nickname"
+                    (click)="changeNickname()"
+                    ><i class="icon fa fa-font" aria-hidden="true"></i> Nickname</button>
+            </div>
+        </div>
+    </div>
+</div>

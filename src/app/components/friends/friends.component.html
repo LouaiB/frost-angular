@@ -1,0 +1,87 @@
+<div id="friendships-section">
+    <h3 class="title">Your friendships</h3>
+    <div id="refresh-flex">
+        <button
+            id="refresh"
+            (click)="fetch()"
+            [disabled]="isLoading"
+        ><i 
+            class="fa fa-refresh" 
+            aria-hidden="true"
+            [class.spin]="isLoading"
+            ></i>
+        </button>
+    </div>
+    <div *ngIf="!isLoading">
+        <div id="friendships" *ngIf="friendships && user" [class.unreachable-glow]="serverUnreachable">
+            <div class="friendship" *ngFor="let f of friendships">
+                <div class="info">
+                    <img class="avatar" src="{{ f.friend.avatar ? apiUrl + '/' + f.friend.avatar : '/assets/img/avatar.png' }}" />
+                    <span class="name" [routerLink]="['/account', f.friend._id]">{{ f.friend.nickname || f.friend.email }}</span>
+                </div>
+                <div class="status">
+                    <i 
+                        class="fa fa-arrow-right outbound" 
+                        aria-hidden="true"
+                        *ngIf="f.friendship.user1Id == user.userId"
+                    ></i>
+                    <i 
+                        class="fa fa-arrow-left inbound" 
+                        aria-hidden="true"
+                        *ngIf="f.friendship.user2Id == user.userId"
+                    ></i>
+                    <i 
+                        class="fa fa-check accepted" 
+                        aria-hidden="true"
+                        *ngIf="f.friendship.isAccepted"
+                    ></i>
+                    <i 
+                        class="fa fa-times declined" 
+                        aria-hidden="true"
+                        *ngIf="f.friendship.isDeclined"
+                    ></i>
+                </div>
+                <div class="actions">
+                    <button
+                        class="accept"
+                        (click)="accept(f.friendship._id)"
+                        [class.actioning]="actioning"
+                        [disabled]="actioning"
+                        *ngIf="f.friendship.user2Id == user.userId && f.friendship.isPending"
+                        ><i class="fa fa-check" aria-hidden="true"></i></button>
+                    <button
+                        class="decline"
+                        (click)="decline(f.friendship._id)"
+                        [class.actioning]="actioning"
+                        [disabled]="actioning"
+                        *ngIf="f.friendship.user2Id == user.userId && f.friendship.isPending"
+                        ><i class="fa fa-times" aria-hidden="true"></i></button>
+                    <button
+                        class="undecline"
+                        (click)="undecline(f.friendship._id)"
+                        [class.actioning]="actioning"
+                        [disabled]="actioning"
+                        *ngIf="f.friendship.user2Id == user.userId && f.friendship.isDeclined"
+                        ><i class="fa fa-undo" aria-hidden="true"></i></button>
+                    <button
+                        class="cancel"
+                        (click)="cancel(f.friendship._id)"
+                        [class.actioning]="actioning"
+                        [disabled]="actioning"
+                        *ngIf="f.friendship.user1Id == user.userId && f.friendship.isPending"
+                        ><i class="fa fa-eraser" aria-hidden="true"></i></button>
+                    <button
+                        class="unfriend"
+                        (click)="unfriend(f.friendship._id)"
+                        [class.actioning]="actioning"
+                        [disabled]="actioning"
+                        *ngIf="f.friendship.isAccepted"
+                        ><i class="fa fa-minus" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOADER -->
+    <img class="component-loading-gif" [class.unreachable]="serverUnreachable" src="/assets/img/loader.gif" *ngIf="isLoading" />
+</div>

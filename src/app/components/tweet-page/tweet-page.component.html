@@ -1,0 +1,19 @@
+<div id="tweet-page" [class.unreachable]="serverUnreachable">
+    <div *ngIf="tweet" class="tweet-box">
+        <h1 class="title">Flake</h1>
+        <app-tweet class="the-tweet"
+            [tweet]="tweet"
+            [actionable]="true"
+            (deleteTweet)="deleteTweet($event)" 
+        ></app-tweet>
+    </div>
+    <div class="not-found" *ngIf="tweetNotFound">
+        <span class="error">ERROR</span>
+        <span class="err404">404</span>
+        <hr>
+        <span class="msg">Tweet Not Found</span>
+    </div>
+
+    <!-- LOADER -->
+    <img class="component-loading-gif" src="/assets/img/loader.gif" *ngIf="isLoading" />
+</div>

@@ -1,0 +1,5 @@
+<div class="pops-list" *ngIf="alerts as alertList">
+    <div *ngFor="let alert of alertList">
+        <app-pop [alert]="alert"></app-pop>
+    </div>
+</div>

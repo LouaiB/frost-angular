@@ -1,0 +1,73 @@
+@import 'src/assets/styles/_variables.sass'
+    
+#search-section
+    display: flex
+    flex-direction: column
+
+    #search-box
+        position: relative
+
+        input
+            outline: none
+            width: 100%
+            padding: 10px 15px
+            border: 1px solid #88888888
+            border-radius: 4px
+            box-sizing: border-box
+
+        button
+            position: absolute
+            right: 8px
+            top: 0
+            bottom: 0
+            background: transparent
+            border: 0
+            outline: none
+            cursor: pointer
+
+            i
+                font-size: 1.2em
+                color: #888
+                transition: all 2s
+
+            .spin
+                animation: spin infinite 0.4s
+
+    #search-results
+        display: flex
+        flex-direction: column
+
+        .found-tweet
+            width: 100%
+            outline: none
+            cursor: pointer
+            transition: all 0.2s
+
+            &:hover
+                background: #eaeaea
+    
+    .nothing-found
+        color: $primaryColorDark
+        text-align: center
+        letter-spacing: $titleLetterSpacing
+
+    #show-more-results
+        border: 0
+        outline: none
+        cursor: pointer
+        width: fit-content
+        margin: 0 auto
+        background-color: transparent
+        padding: 10px 20px
+        font-size: 2em
+        color: $primaryColorDark
+
+    .spin
+        animation: spin 1s infinite
+
+@keyframes spin
+    0%
+        transform: rotateZ(0deg)
+        
+    100%
+        transform: rotateZ(360deg)

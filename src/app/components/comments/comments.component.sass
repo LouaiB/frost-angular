@@ -1,0 +1,77 @@
+@import 'src/assets/styles/_variables.sass'
+    
+.comments
+    padding: 20px
+
+    .add-comment
+        position: relative
+        margin-bottom: 10px
+
+        input
+            width: 100%
+            box-sizing: border-box
+            padding: 5px 8px
+            outline: none
+            border: 1px solid #777
+            border-radius: 4px
+
+        button
+            position: absolute
+            top: 0
+            bottom: 0
+            right: 0
+            background: transparent
+            outline: none
+            cursor: pointer
+            padding: 7px 14px
+            background-color: transparent
+            color: #888
+            border: 0
+            border-radius: 4px
+            transition: all 0.2s
+
+            &:hover
+                color: $primaryColor
+
+    .comments-list-title
+        color: #333
+
+    .loader
+        color: $bgGradDark
+        animation: spin infinite 1s
+
+    .comments-list
+        display: flex
+        flex-direction: column
+
+    .load-more
+        border: 0
+        outline: none
+        cursor: pointer
+        background-color: transparent
+        padding: 10px 20px
+        color: $primaryColorDark
+
+    .none
+        display: none
+
+    .busy
+        position: relative
+
+        &::before
+            content: '🗑️'
+            font-size: 16px
+            display: flex
+            flex-direction: row
+            align-items: center
+            justify-content: center
+            position: absolute
+            top: 0
+            bottom: 0
+            left: 0
+            right: 0
+            height: 100%
+            width: 100%
+            background: #55555555
+            z-index: 200
+            animation: shimmer 2s infinite

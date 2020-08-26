@@ -1,0 +1,57 @@
+<div id="header-flex">
+    <div id="left">
+        <img class="banner" src="assets/img/frost-banner.png" routerLink="/" />
+    </div>
+    <div id="right" #right>
+        <div *ngIf="user && user.isLoggedIn">
+            <div class="profile">
+                <span class="mentions-icon" *ngIf="newMentions.length > 0">
+                    <i class="fa fa-bell" aria-hidden="true"></i> {{ newMentions.length }}
+                </span>
+                <div class="welcome">
+                    <img class="avatar" src="{{ user.avatar ? apiUrl + '/' + user.avatar : '/assets/img/avatar.png' }}" />
+                    <span class="username">{{ user.nickname || user.email }}</span>
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="dropdown"
+                [class.open]="isDropdownOpen"
+                [class.closed]="!isDropdownOpen"
+            >
+                <div id="decoration"></div>
+                <div id="menu">
+                    <div id="links">
+                        <a (click)="goToAccount()" (click)="isDropdownOpen = false">My Account</a>
+                        <a routerLink="/friends" (click)="isDropdownOpen = false">My Friends</a>
+                        <a routerLink="/logout" (click)="isDropdownOpen = false">Log Out</a>
+                    </div>
+                    <div id="mentions" *ngIf="newMentions.length > 0">
+                        <hr>
+                        <button
+                            (click)="setSeen(); isDropdownOpen = false;"
+                            class="clear-btn"    
+                        >Clear</button>
+                        <div class="mention" *ngFor="let mention of newMentions">
+                            <img class="avatar" src="{{ mention.mentioner.avatar ? apiUrl + '/' + mention.mentioner.avatar : 'assets/img/avatar.png' }}" />
+                            <div class="desc">
+                                <span class="date">{{ mention.mentionedOn | date:'dd/MM/y - hh:mm a' }}</span>
+                                <span class="message">
+                                    <a 
+                                        class="account-link"
+                                        [routerLink]="['/account', mention.mentioner._id]"
+                                        (click)="isDropdownOpen = false"
+                                        >{{ mention.mentioner.nickname || mention.mentioner.email }}</a> mentioned you.
+                                </span>
+                                <a 
+                                    class="tweet-link"
+                                    [routerLink]="['/tweet', mention.tweetId]"
+                                    (click)="isDropdownOpen = false"
+                                    >view flake</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

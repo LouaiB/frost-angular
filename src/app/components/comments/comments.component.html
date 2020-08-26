@@ -1,0 +1,21 @@
+<div class="comments">
+    <div class="add-comment">
+        <input [(ngModel)]="newComment" placeholder="add a comment..." />
+        <button (click)="addComment()"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+    </div>
+    <span class="comments-list-title">Comments ({{ allComments.length }}) </span>
+    <i 
+        class="fa fa-spinner loader"
+        [class.unreachable-spinner]="serverUnreachable"
+        aria-hidden="true"
+        *ngIf="isLoading"
+        ></i>
+    <div *ngFor="let comment of visibleComments" class="comments-list">
+        <app-comment class="comment" 
+            [class.busy]="busyComments.includes(comment._id)"
+            [comment]="comment"
+            [tweetId]="tweetId" 
+            (deleteComment)="deleteComment($event)"></app-comment>
+    </div>
+    <button (click)="loadMoreComments()" [class.none]="startingIndex >= allComments.length" class="load-more">Load more</button>
+</div>

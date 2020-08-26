@@ -1,0 +1,37 @@
+<div id="login-page" class="fill-main">
+    <div id="login-section">
+        <h2 class="title">Login</h2>
+        <hr class="hr">
+        <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+            <div class="form-group">
+                <label class="input-label">Email</label>
+                <input type="text" class="form-control" id="email" name="email" #email="ngModel" [(ngModel)]="model.email"
+                    required
+                    pattern="^[a-zA-Z0-9.]+@[a-zA-Z0-9]+.[a-z]+$"
+                    [class.is-invalid]="email.invalid && email.touched"
+                    [class.is-valid]="email.valid && email.touched"
+                    [class.is-untouched]="email.untouched" />
+                <div *ngIf="email.touched" class="error-region">
+                    <span class="span-danger" *ngIf="email.errors?.required">Email required.</span>
+                    <span class="span-danger" *ngIf="email.errors?.pattern">Must be valid email.</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="input-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" #password="ngModel" [(ngModel)]="model.password"
+                    required
+                    [class.is-invalid]="password.invalid && password.touched"
+                    [class.is-valid]="password.valid && password.touched"
+                    [class.is-untouched]="password.untouched" />
+                <div *ngIf="password.touched" class="error-region">
+                    <span class="span-danger" *ngIf="password.errors?.required">Password required.</span>
+                </div>
+            </div>
+
+            <p class="error-msg" [style.visibility]="error == '' ? 'hidden' : 'visible'">{{ error }}</p>
+            <span class="register">not a member? <a class="register-link" routerLink="/register">register</a></span>
+            <input type="submit" class="submit-btn" value="{{ loggingIn ? 'Logging In' : 'Log In' }}" [disabled]="!userForm.form.valid || loggingIn" />
+        </form>
+    </div>
+</div>

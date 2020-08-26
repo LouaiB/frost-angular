@@ -1,0 +1,65 @@
+<div id="register-page">
+    <div id="register-section">
+        <h2 class="title">Register</h2>
+        <hr class="hr">
+        <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+            <div class="form-group">
+                <label class="input-label">Email</label>
+                <input type="text" class="form-control" id="email" name="email" #email="ngModel" [(ngModel)]="model.email"
+                    required
+                    pattern="^[a-zA-Z0-9.]+@[a-zA-Z0-9]+.[a-z]+$"
+                    [class.is-invalid]="email.invalid && email.touched"
+                    [class.is-valid]="email.valid && email.touched"
+                    [class.is-untouched]="email.untouched" />
+                <div *ngIf="email.touched" class="error-region">
+                    <span class="span-danger" *ngIf="email.errors?.required">Email required.</span>
+                    <span class="span-danger" *ngIf="email.errors?.pattern">Must be valid email.</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="input-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" #password="ngModel" [(ngModel)]="model.password"
+                    required
+                    [class.is-invalid]="password.invalid && password.touched"
+                    [class.is-valid]="password.valid && password.touched"
+                    [class.is-untouched]="password.untouched" />
+                <div *ngIf="password.touched" class="error-region">
+                    <span class="span-danger" *ngIf="password.errors?.required">Password required.</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="input-label">Slug</label>
+                <input type="text" class="form-control" id="slug" name="slug" #slug="ngModel" [(ngModel)]="model.slug"
+                    required
+                    minlength="3"
+                    pattern="^[a-zA-Z0-9]+$"
+                    [class.is-invalid]="slug.invalid && slug.touched"
+                    [class.is-valid]="slug.valid && slug.touched"
+                    [class.is-untouched]="slug.untouched" />
+                <div *ngIf="slug.touched" class="error-region">
+                    <span class="span-danger" *ngIf="slug.errors?.minlength">Must be three characters or more.</span>
+                    <span class="span-danger" *ngIf="slug.errors?.required">Slug required.</span>
+                    <span class="span-danger" *ngIf="slug.errors?.pattern">Only alphabet and numbers allowed in slug.</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="input-label">Nickname</label>
+                <input type="text" class="form-control" id="nickname" name="nickname" #nickname="ngModel" [(ngModel)]="model.nickname"
+                    minlength="3"
+                    [class.is-invalid]="nickname.invalid && nickname.touched"
+                    [class.is-valid]="nickname.valid && nickname.touched"
+                    [class.is-untouched]="nickname.untouched" />
+                <div *ngIf="nickname.touched" class="error-region">
+                    <span class="span-danger" *ngIf="nickname.errors?.minlength">Must be three characters or more.</span>
+                </div>
+            </div>
+
+            <p class="error-msg" [style.visibility]="error == '' ? 'hidden' : 'visible'">{{ error }}</p>
+            <span class="register">already a member? <a class="register-link" routerLink="/login">login</a></span>
+            <input type="submit" class="submit-btn" value="{{ registering ? 'Registering' : 'Register' }}" [disabled]="!userForm.form.valid || registering" />
+        </form>
+    </div>
+</div>

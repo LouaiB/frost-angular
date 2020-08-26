@@ -1,0 +1,8 @@
+<div id="user-strip" *ngIf="user | async as u">
+    <img class="avatar" src="{{ u.avatar ? apiUrl + '/' + u.avatar : '/assets/img/avatar.png' }}" />
+    <hr>
+    <span class="name-big">{{ u.nickname ? u.nickname : u.email }}</span>
+    <!-- <span class="name-small" *ngIf="u.nickname">{{ u.email }}</span> -->
+    <!-- <span class="slug">@{{ u.slug }}</span> -->
+    <button class="account-btn" [routerLink]="['/account', u.userId]">My Account</button>
+</div>

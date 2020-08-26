@@ -1,0 +1,21 @@
+<div id="tweets">
+    <h2 class="title">Tweets</h2>
+    <div class="tweet" *ngFor="let tweet of tweets">
+        <app-tweet 
+            [tweet]="tweet"
+            [actionable]="true"
+            (deleteTweet)="deleteTweet($event)"
+            ></app-tweet>
+    </div>
+    <span *ngIf="!isLoading && tweetsOver" class="tweets-over-span">No more tweets</span>
+    <span *ngIf="!isLoading && noTweets" class="no-tweets-span">This account has no tweets</span>
+    <button
+        (click)="loadMorePosts()" 
+        id="load-more-posts"
+        [class.wheel]="isFetchingMorePosts"
+        *ngIf="!isLoading && !tweetsOver && !noTweets"
+    >+</button>
+
+    <!-- LOADER -->
+    <img class="component-loading-gif" [class.unreachable]="serverUnreachable" src="/assets/img/loader.gif" *ngIf="isLoading" />
+</div>

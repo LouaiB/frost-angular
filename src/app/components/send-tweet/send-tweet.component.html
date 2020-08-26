@@ -1,0 +1,45 @@
+<div id="send-tweet-section">
+    <div id="input">
+        <textarea 
+            #tweetInput
+            placeholder="send a flake.."
+            (input)="onInput()"
+            [(ngModel)]="tweet"
+            (focus)="hasFocus = true"
+            (blur)="hasFocus = false"
+            ></textarea>
+        <button (click)="sendTweet()"
+            [disabled]="tweet.length < 10 || sending"
+        ><i 
+            class="fa fa-snowflake-o"
+            [class.sending]="sending"
+            [class.unreachable-icon]="serverUnreachable"
+            aria-hidden="true"></i></button>
+        <div id="suggestions" *ngIf="hasFocus || hoveringSuggestion">
+            <div 
+                class="suggestion"
+                *ngFor="let suggestion of suggestions"
+                (mouseover)="hoveringSuggestion = true"
+                (mouseout)="hoveringSuggestion = false"
+                (click)="selectMention(suggestion.friend.slug)">
+                <div class="left">
+                    <img class="avatar" [src]="suggestion.friend.avatar ? apiUrl + '/' + suggestion.friend.avatar : 'assets/img/avatar.png'" />
+                    <span class="name">{{ suggestion.friend.nickname || suggestion.friend.email }}</span>
+                </div>
+                <div class="right">
+                    <span class="slug">@{{ suggestion.friend.slug }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="attachment">
+        <input
+            type="file"
+            id="file"
+            (change)="handleFileInput($event.target.files)" />
+        <i 
+            class="fa fa-picture-o" 
+            aria-hidden="true"
+            [class.has-value]="fileToUpload != null"></i>
+    </div>
+</div>

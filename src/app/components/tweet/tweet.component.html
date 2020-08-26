@@ -1,0 +1,90 @@
+<div class="tweet" [class.retweet]="tweet.reposter">
+    <div class="header">
+        <div class="avatar-container">
+            <img src="{{ tweet.poster.avatar ? apiUrl + '/' + tweet.poster.avatar : '/assets/img/avatar.png' }}" class="avatar" />
+        </div>
+        <div class="info">
+            <span class="poster" [routerLink]="['/account', tweet.poster._id]">{{ tweet.poster.nickname || tweet.poster.email }} <span *ngIf="tweet.reposter" class="sharedBy">[<i class="fa fa-retweet" aria-hidden="true"></i> by: {{ tweet.reposter.nickname || tweet.reposter.email }}]</span></span>
+            <span class="createdOn">fell on: {{ tweet.post.createdOn | date:'LLLL d, y - hh:mm a' }}</span>
+        </div>
+        <div class="actions" *ngIf="userId == tweet.post.userId && actionable">
+            <button class="edit" 
+                (click)="editMode()" 
+                *ngIf="userId == tweet.poster._id && !inEditMode">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+            </button>
+            <button class="save" 
+                (click)="editTweet()" 
+                *ngIf="userId == tweet.poster._id && inEditMode">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+            </button>
+            <button class="cancle" 
+                (click)="cancleEdit()" 
+                *ngIf="userId == tweet.poster._id && inEditMode">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+            <button class="delete" 
+                (click)="deleteTweetHandler()" 
+                *ngIf="userId == tweet.poster._id && !inEditMode">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+    <img *ngIf="tweet.post.mediapath" 
+        class="tweet-attachment" 
+        (click)="inEditMode ? '' : lightbox(apiUrl + '/' + tweet.post.mediapath)"
+        [src]="apiUrl + '/' + tweet.post.mediapath"
+        />
+    <div class="keep" *ngIf="inEditMode">
+        <input type="checkbox" [(ngModel)]="keepMedia" />
+        <span>Keep attachment?</span>
+    </div>
+    <p class="content" *ngIf="!inEditMode" [innerHtml]="formattedTweet | keepHtml"></p>
+    <div id="mentions" *ngIf="mentions.length > 0">
+        this flake mentioned: 
+        <a class="mention-link" *ngFor="let mention of mentions; let isLast=last" [routerLink]="['/account', mention]">
+            {{ mention }}{{ isLast ? '' : ', ' }}
+        </a>
+    </div>
+    <div id="edit-group" *ngIf="actionable">
+        <input id="edit-feild" type="text" [(ngModel)]="editedTweet" *ngIf="inEditMode" />
+        <div id="new-attachment" *ngIf="inEditMode">
+            <input
+                type="file"
+                id="file"
+                (change)="handleFileInput($event.target.files)" />
+            <i 
+                class="fa fa-picture-o"
+                aria-hidden="true"
+                [class.has-value]="fileToUpload != null"></i>
+        </div>
+    </div>
+    <div class="tweet-btn-group" *ngIf="actionable">
+        <div class="likes">
+            <button class="icon-btn" 
+                [class.is-liked]="tweet.post.likes.includes(userId)"
+                (click)="onLikeClicked()"
+            ><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="likes-count">{{ tweet.post.likes.length }}</span></button>
+        </div>
+        <div class="shares">
+            <button class="icon-btn" 
+                [class.is-shared]="tweet.post.shares.includes(userId)"
+                (click)="onShareClicked()"
+            ><i class="fa fa-retweet" aria-hidden="true"></i><span class="shares-count">{{ tweet.post.shares.length }}</span></button>
+        </div>
+        <div class="comments">
+            <button class="icon-btn" 
+                [class.is-commented]="userCommented"
+                (click)="toggleComments()"
+            ><i class="fa fa-comment" aria-hidden="true"></i><span class="comments-count">{{ tweet.post.comments.length }}</span></button>
+        </div>
+    </div>
+    <app-comments *ngIf="actionable"
+        class="comments"
+        [tweetId]="tweet.post._id"
+        (commentAdded)="commentAdded($event)"
+        (commentRemoved)="commentRemoved($event)"
+        [class.comments-open]="openComments"
+        [class.comments-closed]="!openComments"
+    ></app-comments>
+</div>

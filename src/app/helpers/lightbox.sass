@@ -1,0 +1,63 @@
+.lightbox-overlay
+    position: fixed
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    background-color: rgba(0, 0, 0, 0.7)
+
+.lightbox
+    width: 100%
+    max-width: 100%
+    height: 100%
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    overflow: hidden
+
+    .lightbox-controls
+        position: absolute
+        top: 0
+        left: 0
+        z-index: 200
+        padding: 10px
+        display: flex
+        flex-direction: row
+        align-items: center
+
+        .lightbox-control
+            font-size: 2em
+            color: white
+            margin: 0 10px
+            background: transparent
+            border: 0
+            outline: none
+            cursor: pointer
+
+    .lightbox-body
+        position: absolute
+        top: 0
+        bottom: 0
+        left: 0
+        right: 0
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+
+        .lightbox-img
+            max-height: 100%
+            max-width: 90vw
+            object-fit: contain
+
+
+.fade-in
+    animation: fadeIn .2s
+
+@keyframes fadeIn
+    0%
+        opacity: 0
+    100%
+        opacity: 1

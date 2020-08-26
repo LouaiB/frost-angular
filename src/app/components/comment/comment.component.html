@@ -1,0 +1,34 @@
+<div class="comment">
+    <div class="comment-avatar-container">
+        <img class="comment-avatar" src="{{ comment.poster.avatar ? apiUrl + '/' + comment.poster.avatar : '/assets/img/avatar.png' }}" />
+    </div>
+    <div class="comment-content">
+        <span class="poster">{{ comment.poster.nickname || comment.poster.email }}</span>
+        <span class="createdOn">commented on: {{ comment.createdOn | date:'LLLL d, y - hh:mm a' }}</span>
+        <br>
+        <span class="comment-text" *ngIf="!inEditMode">{{ comment.comment }}</span>
+        <input type="text" [(ngModel)]="editedComment" *ngIf="inEditMode" />
+    </div>
+    <div class="comment-actions" *ngIf="user | async as u">
+        <button class="edit" 
+            (click)="editMode()" 
+            *ngIf="comment.poster._id == u.userId && !inEditMode">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+        </button>
+        <button class="save" 
+            (click)="editComment()" 
+            *ngIf="comment.poster._id == u.userId && inEditMode">
+                <i class="fa fa-check" aria-hidden="true"></i>
+        </button>
+        <button class="cancle" 
+            (click)="cancleEdit()" 
+            *ngIf="comment.poster._id == u.userId && inEditMode">
+                <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+        <button class="delete" 
+            (click)="deleteCommentHandler()" 
+            *ngIf="comment.poster._id == u.userId && !inEditMode">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>

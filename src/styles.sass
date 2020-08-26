@@ -1,1 +1,159 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'src/assets/styles/_variables.sass'
+
+@font-face 
+    font-family: 'roboto-thin'
+    src: url('/assets/fonts/Roboto-Thin.ttf')
+
+@font-face 
+    font-family: 'roboto'
+    src: url('/assets/fonts/Roboto-Regular.ttf')
+
+html
+  --scrollbarBG: transparent
+  --thumbBG: #888
+body
+    margin: 0
+    padding: 0
+    font-family: roboto, sans-serif
+    scrollbar-width: thin
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG)
+
+    &::-webkit-scrollbar
+        width: 11px
+
+    &::-webkit-scrollbar-track
+        background: var(--scrollbarBG)
+
+    &::-webkit-scrollbar-thumb
+        background-color: var(--thumbBG) 
+        border-radius: 6px
+        border: 3px solid var(--scrollbarBG)
+
+.is-invalid
+    border-left: $borderIndicatorSize solid #ee2233
+
+.is-valid
+    border-left: $borderIndicatorSize solid #22ee33
+
+.is-untouched
+    border-left: $borderIndicatorSize solid #555
+
+.error-region
+    display: flex
+    flex-direction: column
+
+    .span-danger
+        color: red
+        font-size: .8em
+
+.form-group
+    padding: 10px
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+
+    label
+        margin-bottom: 5px
+        font-size: 1em
+
+    input.form-control
+        transition: all .2s
+
+        &[type="text"], &[type="password"]
+            padding: 10px 20px
+            border-top: 1px solid rgba(0, 0, 0, .3)
+            border-bottom: 1px solid rgba(0, 0, 0, .3)
+            border-right: 1px solid rgba(0, 0, 0, .3)
+            border-radius: 4px
+
+            &:focus
+                border-left: $borderIndicatorSize solid #3344ee
+
+.submit-btn
+    padding: 15px 20px
+    width: 100%
+    font-size: 1.1em
+    font-weight: bold
+    color: $bgGradMid
+    background: transparent
+    border: 1px solid $bgGradMid
+    border-radius: 4px
+    cursor: pointer
+    transition: all 0.2s
+
+    &:hover:enabled
+        background: linear-gradient(135deg, $bgGradMid, $bgGradDark)
+        box-shadow: 0 0 10px $bgGradDark
+        color: #fff
+
+    &[disabled], &[disabled]:hover
+        color: -internal-light-dark-color(graytext, rgb(170, 170, 170))
+        background-color: buttonface
+        border: 0
+        cursor: not-allowed
+
+.error-msg
+    color: #fafafa
+    padding: 2px 4px
+    background: #4d84ff
+    font-size: 0.9em
+    border: 1px solid #00348a
+    border-radius: 4px
+
+.component-loading-gif
+    width: min(500px, 100%)
+    display: block
+    margin: auto
+    mix-blend-mode: multiply
+    animation: shimmer 2s infinite
+    transition: all 2s
+
+.unreachable
+    filter: hue-rotate(130deg)
+
+.wheel
+    animation: wheel 5s infinite
+
+.spin
+    animation: spin infinite 0.4s
+
+.slow-spin
+    animation: spin infinite 2s
+
+.unreachable-icon
+    color: #e62e83 !important
+
+@keyframes shimmer
+    0%
+        opacity: 1
+    50%
+        opacity: 0.7
+    100%
+        opacity: 1
+
+@keyframes wheel
+    0%
+        transform: rotateZ(0deg)
+    10%
+        transform: rotateZ(700deg)
+    20%
+        transform: rotateZ(1700deg)
+    60%
+        transform: rotateZ(2400deg)
+    70%
+        transform: rotateZ(2600deg)
+    80%
+        transform: rotateZ(3000deg)
+    100%
+        transform: rotateZ(3600deg)
+
+@keyframes spin
+    0%
+        transform: rotateZ(0deg)
+    100%
+        transform: rotateZ(360deg)
+
+// CUSTOM HELPERS
+@import "src/app/helpers/dialog"
+@import "src/app/helpers/lightbox"

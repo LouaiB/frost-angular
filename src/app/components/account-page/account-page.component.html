@@ -1,0 +1,30 @@
+<div>
+    <div id="account-page" *ngIf="!notFound">
+        <!-- LOADER -->
+        <img class="component-loading-gif" [class.unreachable]="serverUnreachable" src="/assets/img/loader.gif" *ngIf="isLoading" />
+    
+        <div id="account-sections" *ngIf="account">
+            <div id="account-summary-section">
+                <app-account-summary [account]="account"></app-account-summary>
+            </div>
+            <div id="account-gallery-section">
+                <h2 class="title">Recent Images</h2>
+                <span class="empty-gallery" *ngIf="!account.gallery || account.gallery.length == 0">No recent images</span>
+                <app-grid-gallery [account]="account"></app-grid-gallery>
+            </div>
+            <div id="account-friends">
+                <app-account-friends [account]="account"></app-account-friends>
+            </div>
+            <div id="account-tweets">
+                <app-account-tweets [account]="account"></app-account-tweets>
+            </div>
+        </div>
+    
+    </div>
+    <div class="not-found" *ngIf="notFound">
+        <span class="error">ERROR</span>
+        <span class="err404">404</span>
+        <hr>
+        <span class="msg">User Not Found</span>
+    </div>
+</div>

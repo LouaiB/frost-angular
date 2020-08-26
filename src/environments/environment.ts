@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'http://localhost:5000',
+  authCookie: 'frost-auth-token',
+  fakeNetworkDelayShort: 1000,
+  fakeNetworkDelayMedium: 3000,
+  fakeNetworkDelayLong: 5000,
+  fakeNetworkDelayDays: 10000000000
 };
 
 /*

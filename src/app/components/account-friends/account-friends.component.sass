@@ -1,0 +1,84 @@
+@import 'src/assets/styles/_variables.sass'
+
+#friends-section
+    padding: 10px
+    background: $sectionBG
+    border: $sectionBorder
+    border-radius: 4px
+    display: flex
+    flex-direction: column
+
+    #top
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+
+        .title
+            color: $primaryColorDark
+            letter-spacing: $titleLetterSpacing
+            text-align: center
+
+        .friends-list-btn
+            outline: none
+            cursor: pointer
+            border: 1px solid $primaryColorDark
+            border-radius: 4px
+            color: $primaryColorDark
+            background: transparent
+            font-size: 0.9em
+            padding: 5px 8px
+            margin-top: 5px
+            transition: all 0.2s
+
+            &:hover
+                background: $primaryColorDark
+                color: white
+
+    .no-friends
+        color: $primaryColorDark
+        text-align: center
+
+    #friends-list
+        display: flex
+        flex-direction: row
+        flex-wrap: wrap
+        align-items: center
+        justify-content: center
+        overflow-y: auto
+        scrollbar-color: #888 transparent
+        max-height: 70vh
+        max-width: 200px
+
+        @media screen and (max-width: $mobileMaxWidth)
+            flex-direction: row
+            align-items: stretch
+            justify-content: initial
+            max-width: initial
+
+        .friend
+            width: 100px
+            max-width: 100px
+            box-sizing: border-box
+            cursor: pointer
+            padding: 10px
+            display: flex
+            flex-direction: column
+            align-items: center
+            transition: all 0.2s
+
+            &:hover
+                background: #eaeaea
+
+            .avatar
+                width: 60px
+                height: 60px
+                border-radius: 50%
+
+            .display-name
+                max-width: 100%
+                font-size: 0.9em
+                color: #333
+                white-space: nowrap
+                overflow: hidden
+                text-overflow: ellipsis

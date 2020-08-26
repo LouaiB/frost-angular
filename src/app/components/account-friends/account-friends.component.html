@@ -1,0 +1,19 @@
+<div id="friends-section">
+    <div id="top">
+        <h2 class="title">Friends</h2>
+        <div *ngIf="user | async as u">
+            <button 
+                class="friends-list-btn"
+                routerLink="/friends"
+                *ngIf="account.user._id == u.userId"
+                >See all</button>
+        </div>
+    </div>
+    <div id="friends-list">
+        <div class="friend" *ngFor="let friend of account.friends" (click)="viewAccount(friend.friend._id)">
+            <img class="avatar" src="{{ friend.friend.avatar ? apiUrl + '/' + friend.friend.avatar : '/assets/img/avatar.png' }}" >
+            <div class="display-name">{{ friend.friend.nickname || friend.friend.email }}</div>
+        </div>
+    </div>
+    <span class="no-friends" *ngIf="account.friends.length == 0">This account has no friends</span>
+</div>

@@ -1,0 +1,58 @@
+@import 'src/assets/styles/_variables.sass'
+    
+#homepage
+    padding: 10px 20px
+    display: grid
+    gap: .8rem
+    grid-template-columns: minmax(auto, 200px) 2fr 1fr
+    grid-template-rows: max-content auto auto 1fr
+    grid-template-areas: "profile tweet search-users" "profile search-tweets search-users" "profile feed search-users" "sidebar feed search-users"
+
+    @media screen and (max-width: $mobileMaxWidth)
+        padding: 10px
+        gap: .6rem
+        grid-template-columns: 1fr
+        grid-template-rows: auto auto auto auto
+        grid-template-areas: "tweet" "search-users" "feed" "search-tweets"
+    
+    #profile-section
+        grid-area: profile
+
+        @media screen and (max-width: $mobileMaxWidth)
+            display: none
+
+    #sidebar
+        grid-area: sidebar
+
+        @media screen and (max-width: $mobileMaxWidth)
+            display: none
+
+    #search-users
+        grid-area: search-users
+
+    #search-tweets
+        grid-area: search-tweets
+
+    #send-tweet
+        grid-area: tweet
+        background: #e1e1e1
+
+    #feed-section
+        grid-area: feed
+
+        #feed-title
+            text-align: center
+            color: $primaryColorDark
+            margin: 0
+            margin-bottom: 10px
+            letter-spacing: $titleLetterSpacing
+
+    .homepage-section
+        background-color: #fff
+        border: $sectionBorder
+        border-radius: 4px
+        padding: 10px
+        height: fit-content
+
+        @media screen and (max-width: $mobileMaxWidth)
+            border-radius: 0

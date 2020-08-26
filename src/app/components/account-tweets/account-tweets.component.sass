@@ -1,0 +1,29 @@
+@import 'src/assets/styles/_variables.sass'
+
+#tweets
+    display: flex
+    flex-direction: column
+    padding: 10px
+    background: $sectionBG
+    border: $sectionBorder
+    border-radius: 4px
+
+    .title
+        color: $primaryColorDark
+        letter-spacing: $titleLetterSpacing
+        text-align: center
+
+    #load-more-posts
+        border: 0
+        outline: none
+        cursor: pointer
+        width: fit-content
+        margin: 0 auto
+        background-color: transparent
+        padding: 10px 20px
+        font-size: 2em
+        color: $primaryColorDark
+
+    .tweets-over-span, .no-tweets-span
+        color: $primaryColorDark
+        text-align: center

@@ -1,0 +1,122 @@
+@import 'src/assets/styles/_variables.sass'
+$btnGlowRad: 5px
+    
+#account-summary
+    position: relative
+    display: flex
+    flex-direction: row
+    align-items: center
+    padding: 10px 20px
+    background: $sectionBG
+    border: $sectionBorder
+    border-radius: 4px
+
+    @media screen and (max-width: $mobileMaxWidth)
+        flex-direction: column
+
+    .avatar-container
+        margin-right: 20px
+
+        @media screen and (max-width: $mobileMaxWidth)
+            margin: 0
+
+        .avatar
+            height: 150px
+            width: 150px
+            border-radius: 50%
+            margin: 25px
+
+    .info
+        display: flex
+        flex-direction: column
+
+        @media screen and (max-width: $mobileMaxWidth)
+            align-items: center
+
+        >*
+            display: block
+            margin-bottom: 7px
+
+        .name-big
+            font-size: 2.2em
+            color: #333
+
+        .name-small
+            font-size: 1em
+            color: #333        
+
+        .slug
+            position: absolute
+            top: 10px
+            right: 10px
+            padding: 2px 4px
+            background: $bgGradLight
+            color: #fff
+            border-radius: 4px
+            align-self: baseline
+
+        .joined-in
+            font-size: 0.9em
+            color: #888
+            font-style: italic
+
+        .stats
+            display: flex
+            flex-direction: row
+            align-items: center
+
+            .stat
+                background: linear-gradient(135deg, $bgGradLight, $bgGradDark)
+                color: white
+                padding: 5px 12px
+                margin-right: 10px
+                border-radius: 4px
+                display: flex
+                flex-direction: row
+                align-items: center
+                
+                .num
+                    margin-left: 5px
+
+        .account-btn-group
+            display: flex
+            flex-direction: row
+            align-items: center
+            justify-content: space-between
+
+            button
+                outline: none
+                cursor: pointer
+                margin-right: 10px                
+                padding: 10px 20px
+                border: 0
+                border-radius: 4px
+                color: white
+                transition: all 0.2s
+
+                .icon
+                    margin-right: 10px
+
+            button.befriend
+                background: linear-gradient(135deg, $successColor, $successColorDark)
+
+                &:hover
+                    box-shadow: 0 0 $btnGlowRad $successColor
+
+            button.unfriend
+                background: linear-gradient(135deg, $dangerColor, $dangerColorDark)
+
+                &:hover
+                    box-shadow: 0 0 $btnGlowRad $dangerColor
+
+            button.change-avatar
+                background: linear-gradient(135deg, $bgGradMid, $bgGradDark)
+
+                &:hover
+                    box-shadow: 0 0 $btnGlowRad $bgGradLight
+
+            button.change-nickname
+                background: linear-gradient(135deg, $bgGradMid, $bgGradDark)
+
+                &:hover
+                    box-shadow: 0 0 $btnGlowRad $bgGradLight

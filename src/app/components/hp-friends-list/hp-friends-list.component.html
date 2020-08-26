@@ -1,0 +1,21 @@
+<div id="hp-friends-list" >
+    <h3 class="title">Friends</h3>
+    <div id="f-list" *ngIf="friends as fs">
+        <div *ngFor="let friend of fs">
+            <div class="friend-link" [routerLink]="['/account', friend.friend._id]">
+                <div class="friend">
+                    <div class="avatar-container">
+                        <img src="{{ friend.friend.avatar ? apiUrl + '/' + friend.friend.avatar : '/assets/img/avatar.png' }}" class="avatar" />
+                    </div>
+                    <div class="info">
+                        <span class="poster">{{ friend.friend.nickname || friend.friend.email }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="no-friends" [style.visibility]="fs.length > 0 ? 'hidden' : 'visible'">You have no friends</span>
+    </div>
+
+    <!-- LOADER -->
+    <img class="component-loading-gif" [class.unreachable]="serverUnreachable" src="/assets/img/loader.gif" *ngIf="isLoading" />
+</div>

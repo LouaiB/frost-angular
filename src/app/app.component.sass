@@ -1,0 +1,29 @@
+@import 'src/assets/styles/_variables.sass'
+    
+#whole
+    min-height: 100vh
+    display: flex
+    flex-direction: column
+    background: $mainBG
+
+    #header
+
+    #main
+        position: relative
+        flex: 1
+        overflow-y: auto
+
+        &::ng-deep > *
+            position: absolute
+            top: 0
+            bottom: 0
+            left: 0
+            right: 0
+
+            &::ng-deep > div
+                min-height: 100%
+                box-sizing: border-box
+
+    #footer
+
+    

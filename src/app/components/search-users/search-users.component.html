@@ -1,0 +1,25 @@
+<div id="search-section">
+    <div id="search-box">
+        <input type="text" placeholder="search users.." [(ngModel)]="query" (input)="searchDelayed()" />
+        <button (click)="search()" [disabled]="isLoading">
+            <i 
+                class="fa fa-search" 
+                [class.unreachable-icon]="serverUnreachable"
+                aria-hidden="true"
+                *ngIf="!isLoading"></i>
+            <i class="fa fa-spinner spin" aria-hidden="true" *ngIf="isLoading"></i>
+        </button>
+    </div>
+    <div id="search-results" *ngIf="users as us">
+        <div class="found-user" *ngFor="let user of us.users" [routerLink]="['/account', user._id]">
+            <div class="avatar-container">
+                <img src="{{ user.avatar ? apiUrl + '/' + user.avatar : '/assets/img/avatar.png' }}" class="avatar" />
+            </div>
+            <div class="info">
+                <span class="name-big">{{ user.nickname ? user.nickname : user.email }}</span>
+                <span class="name-small" *ngIf="user.nickname">{{ user.email }}</span>
+            </div>
+        </div>
+        <h3 class="nothing-found" *ngIf="us.users.length == 0">No users found</h3>
+    </div>
+</div>

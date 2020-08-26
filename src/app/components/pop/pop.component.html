@@ -1,0 +1,14 @@
+<div [class]="getClasses()">
+    <div class="icon">
+        <i *ngIf="alert.type == 'error' || alert.type == 'eternal-error'" class="fa fa-exclamation-circle" aria-hidden="true"></i>
+        <i *ngIf="alert.type == 'success'" class="fa fa-check-circle" aria-hidden="true"></i>
+        <i *ngIf="alert.type == 'info'" class="fa fa-info-circle" aria-hidden="true"></i>
+    </div>
+    <div class="content">
+        <span class="title">{{ alert.title }}</span>
+        <span class="message">{{ alert.message }}</span>
+        <button class="dismiss" (click)="dismiss()">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>

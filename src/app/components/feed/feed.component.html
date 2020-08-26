@@ -1,0 +1,19 @@
+<div id="feed">
+    <div class="tweet" *ngFor="let post of feed">
+        <app-tweet 
+            [tweet]="post"
+            [actionable]="true"
+            (deleteTweet)="deleteTweet($event)"
+            ></app-tweet>
+    </div>
+    <span *ngIf="!isLoading && feedOver" class="feed-over-span">No more new tweets</span>
+    <button
+        (click)="loadMorePosts()" 
+        id="load-more-posts"
+        [class.wheel]="isFetchingMorePosts"
+        *ngIf="!isLoading && !feedOver"
+    >+</button>
+
+    <!-- LOADER -->
+    <img class="component-loading-gif" [class.unreachable]="serverUnreachable" src="/assets/img/loader.gif" *ngIf="isLoading" />
+</div>
